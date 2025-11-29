@@ -31,8 +31,6 @@ function openTab(page){
     tabs[activeTab].page=page;
     if(page==="home")document.getElementById("homepage").style.display="block";
     if(page==="results")document.getElementById("resultsPage").style.display="block";
-    if(page==="image")document.getElementById("imagePage").style.display="block";
-    if(page==="browser")document.getElementById("browserPage").style.display="block";
 }
 
 /* ---------------- DARK MODE ---------------- */
@@ -58,7 +56,6 @@ function doSearch(){
     let engine=localStorage.getItem("engine")||"google";
     openTab("results");
 
-    // Simulate search results (replace with real API if needed)
     let resultsDiv=document.getElementById("resultsContainer");
     resultsDiv.innerHTML="";
     for(let i=1;i<=5;i++){
@@ -69,43 +66,13 @@ function doSearch(){
     }
 }
 
-// Image search opens browser iframe
+// Image search (opens DuckDuckGo image search in new tab)
 function imageSearch(){
     let q=document.getElementById("searchInput").value.trim();
     if(!q)return;
     let url="https://duckduckgo.com/?q="+encodeURIComponent(q)+"&iax=images&ia=images";
-    document.getElementById("browserURL").value=url;
-    openBrowser();
+    window.open(url,"_blank");
 }
-
-/* ---------------- BROWSER ---------------- */
-function openBrowser(){
-    openTab("browser");
-    let url=document.getElementById("browserURL").value;
-    let content=document.getElementById("browserContent");
-    let blocked=document.getElementById("blockedMsg");
-    blocked.style.display="none";
-    if(url.includes("blocked.com")){blocked.style.display="block"; content.src="about:blank"; return;}
-    content.src=url;
-}
-
-/* ---------------- CLICK RESULTS: OPEN IN NEW IFRAME TAB ---------------- */
-document.addEventListener('click', function(e) {
-    if(e.target.tagName==="A" && e.target.closest("#resultsContainer")){
-        e.preventDefault();
-        let url=e.target.href;
-        // Open new tab with full-page iframe
-        let win = window.open("", "_blank");
-        if(!win){alert("Pop-ups blocked!"); return;}
-        let iframe=document.createElement("iframe");
-        iframe.style.width="100%";
-        iframe.style.height="100%";
-        iframe.style.border="none";
-        iframe.src=url;
-        win.document.body.style.margin="0";
-        win.document.body.appendChild(iframe);
-    }
-});
 
 // Create first tab on load
 createTab();
