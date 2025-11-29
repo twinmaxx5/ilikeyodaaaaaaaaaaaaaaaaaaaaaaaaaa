@@ -38,6 +38,14 @@
         <button onclick="saveSettings()">Save</button>
     </div>
 
+    <!-- Browser Page -->
+    <div id="browserPage" class="page">
+        <input id="browserURL" placeholder="URL">
+        <button onclick="openBrowser()">Go</button>
+        <div id="blockedMsg">wop wop wop wop this site is blocked</div>
+        <iframe id="browserContent" sandbox="allow-same-origin allow-scripts"></iframe>
+    </div>
+
     <!-- Results Page -->
     <div id="resultsPage" class="page">
         <div id="resultsContainer"></div>
@@ -46,14 +54,6 @@
     <!-- Image Page -->
     <div id="imagePage" class="page">
         <div id="imageGrid"></div>
-    </div>
-
-    <!-- Browser Page -->
-    <div id="browserPage" class="page">
-        <input id="browserURL" placeholder="URL">
-        <button onclick="openBrowser()">Go</button>
-        <div id="blockedMsg">wop wop wop wop this site is blocked</div>
-        <iframe id="browserContent" sandbox="allow-same-origin allow-scripts"></iframe>
     </div>
 </div>
 
