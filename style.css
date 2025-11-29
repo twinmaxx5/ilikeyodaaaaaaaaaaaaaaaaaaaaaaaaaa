@@ -63,3 +63,31 @@ body{
 
 /* ---------- TAB DELETE ANIMATION ---------- */
 .tab.removing{opacity:0;height:0;padding:0;margin:0;transition:all .3s ease;}
+
+
+/* Ensure body and main container fill the viewport */
+html, body {
+    height: 100%;
+}
+
+#mainContainer {
+    flex: 1;
+    overflow: hidden; /* Use hidden to avoid extra scrollbars */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Make pages fill the remaining space under topnav and tabs */
+.page {
+    flex: 1;
+    display: none;
+    overflow: auto; /* Scroll inside the page if content is too long */
+    padding: 20px;
+}
+
+/* Make the browser iframe fill the page */
+#browserContent {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
