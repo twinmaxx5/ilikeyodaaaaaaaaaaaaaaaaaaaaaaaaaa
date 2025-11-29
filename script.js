@@ -56,19 +56,20 @@ function doSearch(){
     let q=document.getElementById("searchInput").value.trim();
     if(!q)return;
     let engine=localStorage.getItem("engine")||"google";
-    openTab("browser");
-    let url="";
-    if(q.startsWith("http")) url=q;
-    else{
-        if(engine==="google") url="https://www.google.com/search?q="+encodeURIComponent(q);
-        else if(engine==="bing") url="https://www.bing.com/search?q="+encodeURIComponent(q);
-        else url="https://duckduckgo.com/?q="+encodeURIComponent(q);
+    openTab("results");
+
+    // Simulate search results (replace with real API if needed)
+    let resultsDiv=document.getElementById("resultsContainer");
+    resultsDiv.innerHTML="";
+    for(let i=1;i<=5;i++){
+        let link = q.startsWith("http") ? q : (engine==="google" ? "https://www.google.com/search?q="+encodeURIComponent(q) : engine==="bing" ? "https://www.bing.com/search?q="+encodeURIComponent(q) : "https://duckduckgo.com/?q="+encodeURIComponent(q));
+        let card=document.createElement("div"); card.className="resultCard";
+        card.innerHTML=`<a href="${link}" target="_blank">${q} Result ${i}</a>`;
+        resultsDiv.appendChild(card);
     }
-    document.getElementById("browserURL").value=url;
-    openBrowser();
 }
 
-/* ---------------- IMAGE SEARCH ---------------- */
+// Image search opens browser iframe
 function imageSearch(){
     let q=document.getElementById("searchInput").value.trim();
     if(!q)return;
@@ -88,4 +89,23 @@ function openBrowser(){
     content.src=url;
 }
 
+/* ---------------- CLICK RESULTS: OPEN IN NEW IFRAME TAB ---------------- */
+document.addEventListener('click', function(e) {
+    if(e.target.tagName==="A" && e.target.closest("#resultsContainer")){
+        e.preventDefault();
+        let url=e.target.href;
+        // Open new tab with full-page iframe
+        let win = window.open("", "_blank");
+        if(!win){alert("Pop-ups blocked!"); return;}
+        let iframe=document.createElement("iframe");
+        iframe.style.width="100%";
+        iframe.style.height="100%";
+        iframe.style.border="none";
+        iframe.src=url;
+        win.document.body.style.margin="0";
+        win.document.body.appendChild(iframe);
+    }
+});
+
+// Create first tab on load
 createTab();
