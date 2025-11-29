@@ -91,3 +91,12 @@ html, body {
     height: 100%;
     border: none;
 }
+
+#topnav, #tabBar {
+    flex: none;
+}
+
+#homepage {
+    margin-top: 5%;
+    text-align: center;
+}
