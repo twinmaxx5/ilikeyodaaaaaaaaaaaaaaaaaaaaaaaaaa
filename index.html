@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⅁oogle</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="topnav">
+    <a href="#" onclick="openTab('home')">Home</a>
+    <a href="#" onclick="openSettings()">Settings</a>
+    <a href="#" onclick="toggleDark()">Dark Mode</a>
+</div>
+
+<div id="tabBar">
+    <div id="newTab" onclick="createTab()">+</div>
+</div>
+
+<div id="mainContainer">
+    <!-- Home Page -->
+    <div id="homepage" class="page">
+        <div class="logo">⅁oogle</div>
+        <input id="searchInput" placeholder="Search or enter URL...">
+        <div id="searchBtns">
+            <button onclick="doSearch()">⅁oogle Search</button>
+            <button onclick="imageSearch()">Images</button>
+        </div>
+    </div>
+
+    <!-- Settings Popup -->
+    <div id="settingsPopup">
+        <h2>Search Engine</h2>
+        <div class="engine-option"><input type="radio" name="engine" value="google" checked> Google</div>
+        <div class="engine-option"><input type="radio" name="engine" value="bing"> Bing</div>
+        <div class="engine-option"><input type="radio" name="engine" value="duckduckgo"> DuckDuckGo</div>
+        <button onclick="saveSettings()">Save</button>
+    </div>
+
+    <!-- Results Page -->
+    <div id="resultsPage" class="page">
+        <div id="resultsContainer"></div>
+    </div>
+
+    <!-- Image Page -->
+    <div id="imagePage" class="page">
+        <div id="imageGrid"></div>
+    </div>
+
+    <!-- Browser Page -->
+    <div id="browserPage" class="page">
+        <input id="browserURL" placeholder="URL">
+        <button onclick="openBrowser()">Go</button>
+        <div id="blockedMsg">wop wop wop wop this site is blocked</div>
+        <iframe id="browserContent" sandbox="allow-same-origin allow-scripts"></iframe>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
